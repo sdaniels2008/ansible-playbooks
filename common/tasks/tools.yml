@@ -1,0 +1,49 @@
+# Debian Family
+- name: Install debian tools
+  when: ansible_os_family == "Debian"
+  apt:
+    state: latest
+    update_cache: yes
+    cache_valid_time: 36000
+    name:
+      - bash-completion
+      - curl
+      - gnupg
+      - iotop
+      - iptables
+      - less
+      - man
+      - mlocate
+      - nano
+      - net-tools
+      - parted
+      - procps
+      - rsync
+      - socat
+      - sysstat
+      - tcpdump
+      - tmux
+      - unzip
+      - vim
+      - wget
+      - zip
+  #    - gcc
+  #    - git
+  #    - subversion
+  #    - patch
+  #    - make
+  #    - mercurial
+      # Only in Debian:
+      - apt-transport-https
+      - apt-utils
+      - aptitude
+      - command-not-found
+      - debian-archive-keyring
+      - dnsutils # dig
+      - htop
+      - netcat
+      - ncdu
+  #    - aria2
+  #    - python-dev
+  #    - git-lfs
+  #    - p7zip-full

@@ -1,0 +1,23 @@
+- name: Update /root/.bashrc
+  copy:
+    src: bashrc
+    dest: /root/.bashrc
+
+- name: Set timezone to America/Toronto
+  copy:
+    dest: /etc/timezone
+    content: "America/Toronto\n"
+
+- name: Set timezone to America/Toronto
+  file:
+    src: /usr/share/zoneinfo/America/Toronto
+    dest: /etc/localtime
+    state: link
+
+- name: Update /etc/apt/sources.list [Debian]
+  template:
+    src: Debian-sources.list.j2
+    dest: /etc/apt/sources.list
+  when: ansible_distribution == "Debian"
+
+- include: tools.yml

@@ -1,0 +1,27 @@
+- name: Copy docker-compose to server
+  copy:
+    src: prometheus
+    dest: /infra
+  notify:
+    - restart prometheus
+
+- name: Create a volume directory
+  file:
+    path: /volumes/prometheus
+    state: directory
+
+- name: Create volumes symlink
+  file:
+    src: /volumes/prometheus
+    dest: /infra/prometheus/volumes
+    state: link
+
+- name: Ensure prometheus is up
+  docker_service:
+    project_src: /infra/prometheus
+  register: output
+
+- assert:
+    that:
+      - "prometheus.prometheus_prometheus_1.state.running"
+      - "grafana.prometheus_grafana_1.state.running"

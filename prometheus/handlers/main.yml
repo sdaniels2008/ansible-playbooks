@@ -1,0 +1,4 @@
+- name: restart prometheus
+  docker_service:
+    project_src: /infra/prometheus
+    restarted: yes
